@@ -39,7 +39,8 @@ var create = function(){
   Nakama.keyboard = Nakama.game.input.keyboard;
 
   Nakama.background = Nakama.game.add.sprite(0,-960,'background');
-  Nakama.player = Nakama.game.add.sprite(200,200,'assets','Spaceship1-Player.png');
+  Nakama.player = Nakama.game.add.sprite(400,700,'assets','Spaceship1-Player.png');
+  Nakama.partner = Nakama.game.add.sprite(200,700,'assets','Spaceship1-Partner.png');
 }
 
 // update game state each frame
@@ -57,6 +58,18 @@ var update = function(){
   }
   if (Nakama.keyboard.isDown(Phaser.Keyboard.DOWN) && Nakama.player.position.y < Nakama.configs.GAME_HEIGHT-Nakama.player.height) {
     Nakama.player.position.y += 10;
+  }
+  if (Nakama.keyboard.isDown(Phaser.Keyboard.A) && Nakama.partner.position.x > 0) {
+    Nakama.partner.position.x -= 10;
+  }
+  if (Nakama.keyboard.isDown(Phaser.Keyboard.D) && Nakama.partner.position.x < Nakama.configs.GAME_WIDTH-Nakama.partner.width) {
+    Nakama.partner.position.x += 10;
+  }
+  if (Nakama.keyboard.isDown(Phaser.Keyboard.W) && Nakama.partner.position.y > 0) {
+    Nakama.partner.position.y -= 10;
+  }
+  if (Nakama.keyboard.isDown(Phaser.Keyboard.S) && Nakama.partner.position.y < Nakama.configs.GAME_HEIGHT-Nakama.partner.height) {
+    Nakama.partner.position.y += 10;
   }
 }
 
