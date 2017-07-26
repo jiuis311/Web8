@@ -51,7 +51,7 @@ var create = function(){
       left : Phaser.Keyboard.LEFT,
       right : Phaser.Keyboard.RIGHT,
       fire : Phaser.Keyboard.SPACEBAR
-    }, 1));
+    }, 2));
   Nakama.players.push(new ShipController(
     200,
     700,
@@ -62,7 +62,7 @@ var create = function(){
       left : Phaser.Keyboard.A,
       right : Phaser.Keyboard.D,
       fire : Phaser.Keyboard.F
-    }, 2));
+    }, 1));
 
     //Nakama.bullet = new BulletController(200,800,'BulletType1.png');
 }
