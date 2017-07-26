@@ -62,7 +62,7 @@ var create = function(){
       left : Phaser.Keyboard.A,
       right : Phaser.Keyboard.D,
       fire : Phaser.Keyboard.F
-    }, 1));
+    }, 2));
 
     //Nakama.bullet = new BulletController(200,800,'BulletType1.png');
 }

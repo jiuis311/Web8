@@ -37,14 +37,24 @@ class ShipController {
     //bullet create
     this.fireTimer++;
     if (Nakama.keyboard.isDown(this.configs.fire)) {
-      if (this.fireTimer > 5) {
+      if (this.fireTimer > 5)
+      {
         if (this.fireStyle == 1) {
           Nakama.bullets.push(new BulletController(this.sprite.position.x ,
-          this.sprite.position.y));
+          this.sprite.position.y, 0, 800, 'BulletType1.png'));
           Nakama.bullets.push(new BulletController(this.sprite.position.x + this.sprite.width/2,
-          this.sprite.position.y));
+          this.sprite.position.y, 0, 800, 'BulletType1.png'));
         }
-        //fireStyle1();
+        if (this.fireStyle == 2) {
+          Nakama.bullets.push(new BulletController(this.sprite.position.x ,
+          this.sprite.position.y, 0, 800, 'BulletType1.png'));
+          Nakama.bullets.push(new BulletController(this.sprite.position.x + this.sprite.width/2,
+          this.sprite.position.y, 0, 800, 'BulletType1.png'));
+          Nakama.bullets.push(new BulletController(this.sprite.position.x - this.sprite.width/4,
+          this.sprite.position.y, -50, 800, 'BulletType1.png'));
+          Nakama.bullets.push(new BulletController(this.sprite.position.x + this.sprite.width*3/4,
+          this.sprite.position.y, 50, 800, 'BulletType1.png'));
+        }
         this.fireTimer = 0;
       }
     }
