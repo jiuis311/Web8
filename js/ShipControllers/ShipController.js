@@ -1,13 +1,15 @@
 class ShipController {
   //var SHIP_SPEED = 300;
   constructor(x, y, spriteName, configs, fireStyle) {
-    this.sprite =  Nakama.game.add.sprite(x , y,'assets',spriteName);
+    this.sprite =  Nakama.playerGroup.create(x , y,'assets',spriteName);
     this.fireStyle = fireStyle;
     Nakama.game.physics.arcade.enable(this.sprite);
     this.sprite.body.collideWorldBounds = true;
     this.configs = configs;
     this.sprite.update = this.update.bind(this);
+    this.sprite.anchor = new Phaser.Point(0.5, 0.5);
     this.configs.SHIP_SPEED = 300;
+    //this.configs.COOLDDOWN = 300;
 
     //bullets
     Nakama.bullets = [];
@@ -35,7 +37,7 @@ class ShipController {
     }
 
     //bullet create
-    this.fireTimer++;
+    /*this.fireTimer++;
     if (Nakama.keyboard.isDown(this.configs.fire)) {
       if (this.fireTimer > 5)
       {
@@ -57,6 +59,14 @@ class ShipController {
         }
         this.fireTimer = 0;
       }
+    }*/
+
+    this.fireTimer++;
+    if (Nakama.keyboard.isDown(this.configs.fire) && this.fireTimer > 5) {
+      this.fire();
+      this.fireTimer = 0;
     }
   }
+
+  fire() {}
 }
