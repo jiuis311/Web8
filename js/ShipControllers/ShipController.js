@@ -14,6 +14,7 @@ class ShipController {
     //bullets
     Nakama.bullets = [];
     this.fireTimer = 0;
+    this.configs.FIRE_SPEED = 5;
   }
 
   update() {
@@ -62,7 +63,7 @@ class ShipController {
     }*/
 
     this.fireTimer++;
-    if (Nakama.keyboard.isDown(this.configs.fire) && this.fireTimer > 5) {
+    if (Nakama.keyboard.isDown(this.configs.fire) && this.fireTimer > this.configs.FIRE_SPEED) {
       this.fire();
       this.fireTimer = 0;
     }

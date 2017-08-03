@@ -68,8 +68,8 @@ var create = function(){
       left : Phaser.Keyboard.LEFT,
       right : Phaser.Keyboard.RIGHT,
       fire : Phaser.Keyboard.SPACEBAR
-    }, 2));
-  Nakama.players.push(new ShipType1Controller(
+    }, ));
+  Nakama.players.push(new ShipType2Controller(
     Nakama.configs.P2_START_POSITION.x,
     Nakama.configs.P2_START_POSITION.y,
     '-Partner',
@@ -79,7 +79,8 @@ var create = function(){
       left : Phaser.Keyboard.A,
       right : Phaser.Keyboard.D,
       fire : Phaser.Keyboard.F
-    }, 1));
+    }
+  ));
 
     Nakama.enemies.push(new EnemyController(
       Nakama.configs.E1_START_POSITION.x,
@@ -94,7 +95,7 @@ var create = function(){
 }
 
 // update game state each frame
-var update = function(){
+var update = function() {
   Nakama.background.position.y += 5;
   if (Nakama.background.position.y > 0) Nakama.background.position.y = -960;
   /*for(var player of Nakama.players)
@@ -116,5 +117,5 @@ var render = function(){}
 
 var onBulletHitEnemy = function(bulletSprite, enemySprite) {
   bulletSprite.kill();
-  enemySprite.damage(1);
+  //enemySprite.damage(1);
 }
