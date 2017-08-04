@@ -58,7 +58,7 @@ var create = function(){
   Nakama.playerGroup = Nakama.game.add.physicsGroup();
   Nakama.enemyGroup = Nakama.game.add.physicsGroup();
 
-  Nakama.players.push(new ShipType1Controller(
+  Nakama.players.push(new ShipType3Controller(
     Nakama.configs.P1_START_POSITION.x,
     Nakama.configs.P1_START_POSITION.y,
     '-Player',
@@ -108,7 +108,7 @@ var update = function() {
     Nakama.bulletGroup,
     Nakama.enemyGroup,
     onBulletHitEnemy
-  )
+  );
 }
 
 
@@ -117,5 +117,8 @@ var render = function(){}
 
 var onBulletHitEnemy = function(bulletSprite, enemySprite) {
   bulletSprite.kill();
-  //enemySprite.damage(1);
+  enemySprite.damage(1);
+
+  //reset Bullet Type 3
+  Nakama.players[0].bullets = [];
 }

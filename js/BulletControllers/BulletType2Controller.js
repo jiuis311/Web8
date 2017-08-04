@@ -6,11 +6,19 @@ class BulletType2Controller extends BulletController {
   }
 
   update() {
+    this.targetEnemy = Nakama.enemyGroup.getFirstAlive();
+    if (this.targetEnemy == null) {
+      this.targetEnemy = {
+        x : this.sprite.x,
+        y : 0
+      }
+    }
+
     var targetAngle = Nakama.game.math.angleBetween(
       this.sprite.position.x,
       this.sprite.position.y,
-      Nakama.enemies[0].sprite.x,
-      Nakama.enemies[0].sprite.y
+      this.targetEnemy.x,
+      this.targetEnemy.y
     );
 
     if (this.sprite.rotation != targetAngle + Math.PI/2) {

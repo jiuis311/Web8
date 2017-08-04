@@ -66,8 +66,12 @@ class ShipController {
     if (Nakama.keyboard.isDown(this.configs.fire) && this.fireTimer > this.configs.FIRE_SPEED) {
       this.fire();
       this.fireTimer = 0;
+    } else {
+      this.destroyBullet();
     }
   }
 
   fire() {}
+
+  destroyBullet() {}
 }
