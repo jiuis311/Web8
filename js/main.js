@@ -58,7 +58,7 @@ var create = function(){
   Nakama.playerGroup = Nakama.game.add.physicsGroup();
   Nakama.enemyGroup = Nakama.game.add.physicsGroup();
 
-  Nakama.players.push(new ShipType3Controller(
+  Nakama.players.push(new ShipType1Controller(
     Nakama.configs.P1_START_POSITION.x,
     Nakama.configs.P1_START_POSITION.y,
     '-Player',
@@ -68,7 +68,7 @@ var create = function(){
       left : Phaser.Keyboard.LEFT,
       right : Phaser.Keyboard.RIGHT,
       fire : Phaser.Keyboard.SPACEBAR
-    }, ));
+    },));
   Nakama.players.push(new ShipType2Controller(
     Nakama.configs.P2_START_POSITION.x,
     Nakama.configs.P2_START_POSITION.y,
