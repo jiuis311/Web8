@@ -1,57 +1,35 @@
-p {
-  color : red;
-}
-
-h1 {
-  background: yellow;
-
-}
-
-/*class selector*/
-.underlined-text{
-  text-decoration: underline;
-}
-
-.bold-text {
+.menu {
+  background-color: #D5B0AC;
   font-weight: bold;
+  height: 30px;
+  text-align: center;
 }
 
-/*id selector*/
-#top {
-  font-family: "Comic Sans MS";
+nav > span{
+  height: 30px;
+  width: 100px;
+  display: inline-block;
+  color: #402E2A;
+  line-height: 30px;
+  cursor: pointer;
 }
 
-/*attribute*/
-[href] {
-  color : green;
+nav > span:hover{
+  background-color: #9CD08F;
+  color: #FFFFFF;
 }
 
-[href="#top"] {
-  font-size: 24px;
+.menu_vertical {
+  width: 100px;
+  display: block;
+  margin-top: 10px;
 }
 
-/*child selector*/
-ul li {
-  list-style: square;
-}
-
-/* direct child selector */
-ul > li {
-  list-style: upper-alpha;
-}
-
-li:last-child{
-  font-style: italic;
-}
-
-nav:hover{
-  text-shadow: 1px 1px rgba(0,0,0,0.5);
-}
-
-a:active{
-  color : brown;
-}
-
-input:focus{
-  border: 2px dashed red;
+.menu_vertical > span {
+  background-color: #D5B0AC;
+  font-weight: bold;
+  height: 30px;
+  text-align: center;
+  display: block;
+  margin-top: 2px;
 }
