@@ -4,9 +4,9 @@ const fileController = require('./fileController.js');
 let app = express();
 const filename = 'test.txt';
 
-var str='';
-var strHeader="<head><meta charset='utf-8'><link rel='stylesheet' type='text/css' href='/style.css'><title></title></head>"
-var strMenu="<nav class='menu'><a href='/index.html'><span>Homepage</span></a><a href='/about.html'><span>About</span></a><a href='/lorem-ipsum'><span>Source Code</span></a></nav>"
+// var str='';
+// var strHeader="<head><meta charset='utf-8'><link rel='stylesheet' type='text/css' href='/style.css'><title></title></head>"
+// var strMenu="<nav class='menu'><a href='/index.html'><span>Homepage</span></a><a href='/about.html'><span>About</span></a><a href='/lorem-ipsum'><span>Source Code</span></a></nav>"
 
 app.use(express.static(__dirname + '/public'));
 
@@ -22,17 +22,38 @@ app.get('/about', (req, res) => {
 //   res.sendFile(__dirname + '/public/style.css');
 // });
 
-var newStr;
+// var newStr;
 
 app.get('/lorem-ipsum', (req, res) => {
-  newStr = fileController.readFileSync(filename);
-  str += "<html>";
-  str += strMenu;
-  str += "<p>" + newStr +"</p>";
-  str = "<body>" + str + "</body>";
-  str = strHeader + str;
-  str += "</html>";
-  res.send(str);
+  // newStr = fileController.readFileSync(filename);
+  // str += "<html>";
+  // str += strMenu;
+  // str += "<p>" + newStr +"</p>";
+  // str = "<body>" + str + "</body>";
+  // str = strHeader + str;
+  // str += "</html>";
+  var str = fileController.readFileSync(filename);
+  res.send(
+    `
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href='/style.css'>
+        <title></title>
+      </head>
+      <body>
+        <nav class="menu">
+          <a href='/index.html'><span>Homepage</span></a>
+          <a href='/about.html'><span>About</span></a>
+          <a href='/lorem-ipsum'><span>Source Code</span></a>
+          <!-- <span>Item 4</span> -->
+        </nav>
+
+        <p>${str}</p>
+
+      </body>
+    </html>`
+  );
 });
 
 // app.get('/app.js', (reg, res) => {
