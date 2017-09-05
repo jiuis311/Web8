@@ -26,7 +26,7 @@ Router.post('/', (req, res) => {
     questionObj.questions[questionId].no++;
   }
   fileController.saveObject(filename, questionObj);
-  res.redirect('/question/addquestion');
+  res.redirect(`/question/${questionId+1}`);
 });
 
 Router.get('/addquestion', (req, res) => {
@@ -48,6 +48,8 @@ Router.post('/addquestion', (req, res) => {
 });
 
 Router.get('/question-result', (req, res) => {
+  questionObj = fileController.objectReader(filename);
+  arrayLength = questionObj.questions.length;
   res.render('question-result', {
     qId : {
       start : 1,
