@@ -1,74 +1,39 @@
 const express = require('express');
+const handlebars = require('express-handlebars');
+const bodyParser = require('body-parser');
 const fileController = require('./fileController.js');
+const questionRouter = require('./questionRouter.js');
 
 let app = express();
-const filename = 'test.txt';
 
-// var str='';
-// var strHeader="<head><meta charset='utf-8'><link rel='stylesheet' type='text/css' href='/style.css'><title></title></head>"
-// var strMenu="<nav class='menu'><a href='/index.html'><span>Homepage</span></a><a href='/about.html'><span>About</span></a><a href='/lorem-ipsum'><span>Source Code</span></a></nav>"
+app.use(bodyParser.urlencoded({extended : true}));
+app.engine('handlebars', handlebars({defaultLayout : 'main'}));
+app.set('view engine', 'handlebars');
 
-app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) =>{
-  res.sendFile(__dirname + '/public/index.html');
+  res.render('home', {
+    head : `<link rel="stylesheet" type="text/css" href='/home-layout-style.css'>`
+  });
 });
+
 
 app.get('/about', (req, res) => {
-  res.send('About something.');
-})
-
-// app.get('/style.css', (req, res) => {
-//   res.sendFile(__dirname + '/public/style.css');
-// });
-
-// var newStr;
-
-app.get('/lorem-ipsum', (req, res) => {
-  // newStr = fileController.readFileSync(filename);
-  // str += "<html>";
-  // str += strMenu;
-  // str += "<p>" + newStr +"</p>";
-  // str = "<body>" + str + "</body>";
-  // str = strHeader + str;
-  // str += "</html>";
-  var str = fileController.readFileSync(filename);
-  res.send(
-    `
-    <html>
-      <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href='/style.css'>
-        <title></title>
-      </head>
-      <body>
-        <nav class="menu">
-          <a href='/index.html'><span>Homepage</span></a>
-          <a href='/about.html'><span>About</span></a>
-          <a href='/lorem-ipsum'><span>Source Code</span></a>
-          <!-- <span>Item 4</span> -->
-        </nav>
-
-        <p>${str}</p>
-
-      </body>
-    </html>`
-  );
+  res.render('about', {
+    head : `<link rel="stylesheet" type="text/css" href='/about-style.css'>`
+  });
 });
 
-// app.get('/app.js', (reg, res) => {
-//   res.sendFile(__dirname + '/app.js');
-// });
-//
-// app.get('/app.js', (reg, res) => {
-//   res.sendFile(__dirname + '/test.txt');
-// });
-//
-// app.get('/sourcecode.html', (reg, res) => {
-//   res.sendFile(__dirname + '/sourcecode.html');
-// })
+app.get('/lorem-ipsum', (req, res) => {
+  var filename = 'test.txt';
+  var str = fileController.readFileSync(filename);
+  res.render('lorem-ipsum', { str : str} );
+});
 
+
+app.use('/question', questionRouter);
+app.use(express.static(__dirname + '/public'));
 
 app.listen(6969, () => {
-  console.log('server is up');
+  console.log('Server is up. Linh is handsome');
 });

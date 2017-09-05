@@ -1,0 +1,31 @@
+/*tag*/
+.question-menu > a > span{
+  height: 30px;
+  width: 200px;
+  display: inline-block;
+  color: #402E2A;
+  line-height: 30px;
+  cursor: pointer;
+}
+
+.question-menu > a > span:hover{
+  background-color: #000080;
+  color: #FFFFFF;
+}
+
+/*class*/
+.question-menu {
+  background-color: #ff4d4d;
+  font-weight: bold;
+  height: 30px;
+  text-align: center;
+}
+
+
+.link {
+  font-size: 20px;
+  font-style: italic;
+  color: #0000ff;
+  display: inline-block;
+  margin: 10px;
+}
