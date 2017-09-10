@@ -9,16 +9,22 @@ let questionObj;
 let arrayLength;
 let questionStat;
 
+//Answer the a random question
 Router.get('/', (req,res) => {
   filename = "question.txt";
   questionObj = fileController.objectReader(filename);
   arrayLength = questionObj.questions.length;
   questionId = Math.floor(Math.random() * arrayLength);
-  res.render('question', {question : questionObj.questions[questionId].str, layout : 'question-layout'});
+  res.render('question', {
+    question : questionObj.questions[questionId].str,
+    idLink :  `/question/api/question/${questionId+1}`,
+    layout : 'question-layout'
+  });
 });
 
-Router.post('/', (req, res) => {
+Router.post('/api/question/:id', (req, res) => {
   questionObj = fileController.objectReader(filename);
+  questionId = req.params.id - 1;
   if (req.body.yes == 1) {
     questionObj.questions[questionId].yes++;
   }
@@ -29,11 +35,13 @@ Router.post('/', (req, res) => {
   res.redirect(`/question/${questionId+1}`);
 });
 
-Router.get('/addquestion', (req, res) => {
+
+//Add a new question
+Router.get('/ask', (req, res) => {
   res.render('addquestion', {layout : 'question-layout'});
 });
 
-Router.post('/addquestion', (req, res) => {
+Router.post('/api/question', (req, res) => {
   filename = "question.txt";
   questionObj = fileController.objectReader(filename);
   questionStat = {
@@ -47,6 +55,8 @@ Router.post('/addquestion', (req, res) => {
   res.redirect('/question/question-result');
 });
 
+
+//Get question result
 Router.get('/question-result', (req, res) => {
   questionObj = fileController.objectReader(filename);
   arrayLength = questionObj.questions.length;
