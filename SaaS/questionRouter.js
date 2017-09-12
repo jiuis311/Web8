@@ -37,7 +37,7 @@ Router.post('/api/question/:id', (req, res) => {
     return;
   }
   if (req.body.voteResult) {
-    res.redirect('/question/question-result');
+    res.redirect(`/question/${questionId+1}`);
     return;
   }
   fileController.saveObject(filename, questionObj);
