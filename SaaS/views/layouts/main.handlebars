@@ -2,6 +2,14 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href='/main-style.css'>
     {{{head}}}
     <title>
@@ -9,12 +17,20 @@
     </title>
   </head>
   <body>
-    <nav class="menu">
+    <div class='container'>
+    <!-- <nav class="menu">
       <a href='/'><span>Homepage</span></a>
       <a href='/about'><span>About</span></a>
       <a href='/lorem-ipsum'><span>Source Code</span></a>
       <a href='/question'><span>Question</span></a>
-    </nav>
-    {{{body}}}
+    </nav> -->
+      <ul class="nav nav-tabs">
+        <li role="presentation" class = {{state1}}><a href="/">Home</a></li>
+        <li role="presentation" class = {{state2}}><a href="/about">About</a></li>
+        <li role="presentation" class = {{state3}}><a href="/lorem-ipsum">Source Code</a></li>
+        <li role="presentation" class = {{state4}}><a href="/question">Question</a></li>
+      </ul>
+      {{{body}}}
+    </div>
   </body>
 </html>

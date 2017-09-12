@@ -1,5 +1,19 @@
-<h3>{{question}}</h3>
+<h1 class='text-center question'>{{question}}</h1>
 <form method="post" action={{idLink}}>
-  <button name='yes' value=1>Yes</button>
-  <button name='no' value=0>No</button>
+  <div class='form-group'>
+    <div class='col-xs-6 text-center'>
+      <button name='yes' value=1 class='btn btn-primary btn-lg'>Yes / Right</button>
+    </div>
+    <div class='col-xs-6 text-center'>
+      <button name='no' value=0 class='btn btn-danger btn-lg'>No / Wrong</button>
+    </div>
+    <div class='row'>
+      <div class='col-xs-6 text-right'>
+        <button name='reloadQuestion' value=1 class='btn btn-default'>Another question</button>
+      </div>
+      <div class='col-xs-6 text-left'>
+        <button name='voteResult' value=1 class='btn btn-default'>Vote result</button>
+      </div>
+    </div>
+  </div>
 </form>

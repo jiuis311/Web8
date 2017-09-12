@@ -1,5 +1,7 @@
-<p>Choose question id (from {{qId.start}} to {{qId.end}})</p>
+<h1>Choose question id (from {{qId.start}} to {{qId.end}})</h1>
 <form method="post" action='/question/question-result'>
-  <input type="number" name="id" placeholder="Question id..." />
-  <input type='submit' />
+  <div class='form-group'>
+    <input type="number" name="id" placeholder="Question id..." />
+  </div>
+  <button type='submit' class='btn btn-primary'>Search</button>
 </form>

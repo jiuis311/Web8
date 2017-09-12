@@ -1,0 +1,70 @@
+/*tag*/
+
+span{
+  height: 30px;
+  width: 100px;
+  display: inline-block;
+  color: #402E2A;
+  line-height: 30px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/*class*/
+.menu {
+  background-color: #8080ff;
+  font-weight: bold;
+  height: 30px;
+  text-align: center;
+  position : relative;
+}
+
+
+.menu_vertical {
+  width: 100px;
+  display: block;
+}
+
+.menu_vertical span {
+  background-color: #8080ff;
+  font-weight: bold;
+  height: 30px;
+  text-align: center;
+  display: block;
+}
+
+.menu_child {
+  display: none;
+
+}
+
+.menu_child2 {
+  display: none;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown:hover .menu_child {
+  position : absolute;
+  top: 100%;
+  display : block;
+}
+
+.dropdown2 {
+  position: relative;
+}
+
+.dropdown2:hover .menu_child2 {
+position : absolute;
+left: 100%;
+top : 0%;
+display : block;
+}
+
+
+span:hover{
+  background: #cc0000;
+  color: #FFFFFF;
+}

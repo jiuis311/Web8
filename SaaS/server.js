@@ -13,21 +13,26 @@ app.set('view engine', 'handlebars');
 
 app.get('/', (req, res) =>{
   res.render('home', {
-    head : `<link rel="stylesheet" type="text/css" href='/home-layout-style.css'>`
+    head : `<link rel="stylesheet" type="text/css" href='/home-layout-style.css'>`,
+    state1 : "active"
   });
 });
 
 
 app.get('/about', (req, res) => {
   res.render('about', {
-    head : `<link rel="stylesheet" type="text/css" href='/about-style.css'>`
+    head : `<link rel="stylesheet" type="text/css" href='/about-style.css'>`,
+    state2 : "active"
   });
 });
 
 app.get('/lorem-ipsum', (req, res) => {
   var filename = 'test.txt';
   var str = fileController.readFileSync(filename);
-  res.render('lorem-ipsum', { str : str} );
+  res.render('lorem-ipsum', {
+    str : str,
+    state3 : "active"
+  } );
 });
 
 

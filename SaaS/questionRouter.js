@@ -18,7 +18,8 @@ Router.get('/', (req,res) => {
   res.render('question', {
     question : questionObj.questions[questionId].str,
     idLink :  `/question/api/question/${questionId+1}`,
-    layout : 'question-layout'
+    layout : 'question-layout',
+    state2 : "active"
   });
 });
 
@@ -31,6 +32,14 @@ Router.post('/api/question/:id', (req, res) => {
   if (req.body.no == 0) {
     questionObj.questions[questionId].no++;
   }
+  if (req.body.reloadQuestion) {
+    res.redirect('/question');
+    return;
+  }
+  if (req.body.voteResult) {
+    res.redirect('/question/question-result');
+    return;
+  }
   fileController.saveObject(filename, questionObj);
   res.redirect(`/question/${questionId+1}`);
 });
@@ -38,7 +47,10 @@ Router.post('/api/question/:id', (req, res) => {
 
 //Add a new question
 Router.get('/ask', (req, res) => {
-  res.render('addquestion', {layout : 'question-layout'});
+  res.render('addquestion', {
+    layout : 'question-layout',
+    state3 : "active"
+  });
 });
 
 Router.post('/api/question', (req, res) => {
@@ -65,7 +77,8 @@ Router.get('/question-result', (req, res) => {
       start : 1,
       end : arrayLength
     },
-    layout : 'question-layout'
+    layout : 'question-layout',
+    state4 : "active"
   });
 });
 
@@ -84,7 +97,8 @@ Router.get('/:id', (req, res) => {
       str : questionObj.questions[questionId].str,
       yes : questionObj.questions[questionId].yes,
       no : questionObj.questions[questionId].no,
-      layout : 'question-layout'
+      layout : 'question-layout',
+      state4 : "active"
     });
   } else res.render("wrong-id", {layout : 'question-layout'});
 });
