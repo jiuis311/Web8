@@ -1,7 +1,9 @@
 <h1>Enter a yes/no question of your choice</h1>
 <form method="post" action="/question/api/question">
   <div class='form-group'>
-    <textarea class="form-control" rows="6" type='text' name='question'></textarea>
+    <textarea id='question_tf' class="form-control" rows="6" type='text' name='question' maxlength='200'></textarea>
+    <p class='help-block'>Còn <span id='text_counter'>200</span>/200 ký tự</p>
   </div>
     <button type='submit' class='btn btn-primary' />Send</button>
 </form>
+<script src='/ask.js'></script>

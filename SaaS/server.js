@@ -1,6 +1,7 @@
 const express = require('express');
 const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const fileController = require('./fileController.js');
 const questionRouter = require('./questionRouter.js');
 
@@ -38,6 +39,14 @@ app.get('/lorem-ipsum', (req, res) => {
 
 app.use('/question', questionRouter);
 app.use(express.static(__dirname + '/public'));
+
+mongoose.connect('mongodb://localhost/quizd', (err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('Connect success');
+  }
+})
 
 app.listen(6969, () => {
   console.log('Server is up. Linh is handsome');

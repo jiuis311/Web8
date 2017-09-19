@@ -1,0 +1,17 @@
+/*default moblie*/
+body {
+  margin : 0px;
+}
+
+.banner {
+  color: #ffffff;
+  background: #0000ff;
+  padding: 20px 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .banner {
+    background: #00ff00;
+    height: 100vh;
+  }
+}

@@ -1,4 +1,5 @@
 const fs = require('fs');
+const questionModel = require('./questionSchema.js');
 
 const saveFile = (filename, data) => {
   fs.writeFileSync(filename, data);
@@ -32,6 +33,29 @@ const randomString = (questionObj) => {
   return questionObj.questions[questionId].str;
 }
 
+const addNewQuestion = (question, callback) => {
+  let newQuestion = {
+    question,
+  };
+  questionModel.create(newQuestion, (err, question) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(question);
+      callback(question._id);
+    }
+  });
+}
+
+//
+// questionModel.create(newQuestion, (err, question) => {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log(question);
+//   }
+// });
+
 const saveObject = (filename, questionObj) => {
   questionStr = JSON.stringify(questionObj);
   saveFile(filename, questionStr);
@@ -44,5 +68,6 @@ module.exports = {
   readFile,
   objectReader,
   randomString,
-  saveObject
+  saveObject,
+  addNewQuestion
 }

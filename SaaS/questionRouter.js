@@ -54,17 +54,19 @@ Router.get('/ask', (req, res) => {
 });
 
 Router.post('/api/question', (req, res) => {
-  filename = "question.txt";
-  questionObj = fileController.objectReader(filename);
-  questionStat = {
-    str : req.body.question,
-    yes : 0,
-    no : 0
-  };
-  questionObj.questions.push(questionStat);
-  fileController.saveObject(filename, questionObj);
-  arrayLength = questionObj.questions.length;
-  res.redirect('/question/question-result');
+  // filename = "question.txt";
+  // questionObj = fileController.objectReader(filename);
+  // questionStat = {
+  //   str : req.body.question,
+  //   yes : 0,
+  //   no : 0
+  // };
+  // questionObj.questions.push(questionStat);
+  // fileController.saveObject(filename, questionObj);
+  // arrayLength = questionObj.questions.length;
+  fileController.addNewQuestion(req.body.question, (id) => {
+    res.redirect(`/question/${id}`);
+  });
 });
 
 
