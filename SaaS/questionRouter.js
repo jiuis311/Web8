@@ -12,36 +12,42 @@ let questionStat;
 //Answer the a random question
 Router.get('/', (req,res) => {
   filename = "question.txt";
-  questionObj = fileController.objectReader(filename);
-  arrayLength = questionObj.questions.length;
-  questionId = Math.floor(Math.random() * arrayLength);
-  res.render('question', {
-    question : questionObj.questions[questionId].str,
-    idLink :  `/question/api/question/${questionId+1}`,
-    layout : 'question-layout',
-    state2 : "active"
+  fileController.randomString((tmp) => {
+    console.log(tmp);
+    questionId = tmp.idNum;
+    res.render('question', {
+      question : tmp.question,
+      idLink :  `/question/api/question/${questionId}`,
+      layout : 'question-layout',
+      state2 : "active"
+    });
   });
+  // questionObj = fileController.objectReader(filename);
+  // arrayLength = questionObj.questions.length;
+  // questionId = Math.floor(Math.random() * arrayLength);
 });
 
 Router.post('/api/question/:id', (req, res) => {
-  questionObj = fileController.objectReader(filename);
-  questionId = req.params.id - 1;
-  if (req.body.yes == 1) {
-    questionObj.questions[questionId].yes++;
-  }
-  if (req.body.no == 0) {
-    questionObj.questions[questionId].no++;
-  }
-  if (req.body.reloadQuestion) {
-    res.redirect('/question');
-    return;
-  }
-  if (req.body.voteResult) {
-    res.redirect(`/question/${questionId+1}`);
-    return;
-  }
-  fileController.saveObject(filename, questionObj);
-  res.redirect(`/question/${questionId+1}`);
+  questionId = req.params.id;
+  fileController.getQuestion(questionId, (question) => {
+    if (req.body.yes) {
+      question.yes++;
+    }
+    if (req.body.no) {
+      question.no++;
+    }
+    if (req.body.reloadQuestion) {
+      res.redirect('/question');
+      return;
+    }
+    if (req.body.voteResult) {
+      res.redirect(`/question/${questionId}`);
+      return;
+    }
+    fileController.updateQuestion(question._id, question, () => {
+      res.redirect(`/question/${questionId}`);
+    });
+  });
 });
 
 
@@ -54,16 +60,6 @@ Router.get('/ask', (req, res) => {
 });
 
 Router.post('/api/question', (req, res) => {
-  // filename = "question.txt";
-  // questionObj = fileController.objectReader(filename);
-  // questionStat = {
-  //   str : req.body.question,
-  //   yes : 0,
-  //   no : 0
-  // };
-  // questionObj.questions.push(questionStat);
-  // fileController.saveObject(filename, questionObj);
-  // arrayLength = questionObj.questions.length;
   fileController.addNewQuestion(req.body.question, (id) => {
     res.redirect(`/question/${id}`);
   });
@@ -90,19 +86,16 @@ Router.post('/question-result', (req, res) => {
 })
 
 Router.get('/:id', (req, res) => {
-  questionObj = fileController.objectReader(filename);
-  arrayLength = questionObj.questions.length;
-  let questionId = parseInt(req.params.id) - 1;
-  console.log(req.params);
-  if (questionId > -1 && questionId < arrayLength) {
+  let questionId = req.params.id;
+  fileController.getQuestion(questionId, (question) => {
     res.render('question-id', {
-      str : questionObj.questions[questionId].str,
-      yes : questionObj.questions[questionId].yes,
-      no : questionObj.questions[questionId].no,
+      str : question.question,
+      yes : question.yes,
+      no : question.no,
       layout : 'question-layout',
       state4 : "active"
     });
-  } else res.render("wrong-id", {layout : 'question-layout'});
+  })
 });
 
 module.exports = Router;

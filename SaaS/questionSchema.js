@@ -6,6 +6,10 @@ const questionSchema = new Schema({
     type : String,
     require : true
   },
+  idNum : {
+    type : Number,
+    default : 0
+  },
   yes : {
     type : Number,
     default : 0

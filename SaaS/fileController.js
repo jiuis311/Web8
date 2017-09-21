@@ -27,34 +27,57 @@ const objectReader = (filename) => {
   return questionObj;
 }
 
-const randomString = (questionObj) => {
-  let arrayLength = questionObj.questions.length;
-  let questionId = Math.floor(Math.random() * arrayLength);
-  return questionObj.questions[questionId].str;
+const randomString = (callback) => {
+  var tmpQuestion;
+  var idNum;
+  var getQuestion = (callback) => {
+    questionModel.count({}, (err, c) => {
+      idNum = c;
+      console.log('Idnum: ' + idNum);
+      callback();
+    });
+  }
+
+  getQuestion(() => {
+    let questionId = Math.floor(Math.random() * idNum);
+    console.log('question Id: ' + questionId);
+    questionModel.findOne({ 'idNum' : questionId }, (err, question) => {
+      tmpQuestion = question;
+      callback(tmpQuestion);
+    });
+  });
+  return;
 }
 
 const addNewQuestion = (question, callback) => {
-  let newQuestion = {
-    question,
-  };
-  questionModel.create(newQuestion, (err, question) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(question);
-      callback(question._id);
-    }
+  questionModel.count({}, (err, c) => {
+      console.log("Id Num : " + c);
+      let newQuestion = {
+          question,
+          idNum : c,
+        };
+      questionModel.create(newQuestion, (err, question) => {
+        if (err) {
+          console.log(err);
+        } else {
+          callback(question.idNum);
+        }
+      });
+    });
+}
+
+const getQuestion = (id, callback) => {
+  questionModel.findOne({'idNum' : id}, (err, question) => {
+    console.log('Get question');
+    callback(question);
   });
 }
 
-//
-// questionModel.create(newQuestion, (err, question) => {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log(question);
-//   }
-// });
+const updateQuestion = (id, question, callback) => {
+  questionModel.findOneAndUpdate({_id : id}, question, {new : true}, (err, question1) => {
+    callback();
+  });
+}
 
 const saveObject = (filename, questionObj) => {
   questionStr = JSON.stringify(questionObj);
@@ -69,5 +92,7 @@ module.exports = {
   objectReader,
   randomString,
   saveObject,
-  addNewQuestion
+  addNewQuestion,
+  getQuestion,
+  updateQuestion
 }
